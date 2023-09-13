@@ -277,7 +277,6 @@ if(NCNN_VULKAN)
                 message(WARNING "Failed to find vulkan since cmake is too old\n"
                     "cmake >= 3.7 required. Consider `brew upgrade cmake`")
             endif()
-
         else()
             message(FATAL_ERROR "Error: CMake didn't find Vulkan. Please set VULKAN_SDK env var, e.g.:\n"
                 "Linux: export VULKAN_SDK=~/soft/vulkansdk/1.2.148.0/x86_64\n"
@@ -289,6 +288,11 @@ if(NCNN_VULKAN)
     endif()
 
     target_link_libraries(ncnn PUBLIC Vulkan::Vulkan)
+    if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+        # Link directory for vulkan-1
+        target_link_libraries(ncnn PUBLIC ${Vulkan_LIBRARIES})
+    endif()
+
     # Support mac platform static library compilation
     if(NOT NCNN_SHARED_LIB AND CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin" AND NOT CMAKE_SYSTEM_NAME STREQUAL "iOS")
         find_library(CoreFoundation NAMES CoreFoundation)

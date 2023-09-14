@@ -106,7 +106,7 @@ jobs:
         output-dir: wheelhouse
 
     - name: Build wheels for ubuntu musllinux
-      if: matrix.os == 'ubuntu-20.04'  &&  matrix.build != 'cp*-musllinux*'
+      if: matrix.os == 'ubuntu-20.04'  &&  matrix.build == 'cp*-musllinux*'
       uses: pypa/cibuildwheel@v2.15.0
       env:
         CIBW_ARCHS_LINUX: ${{ matrix.arch }}

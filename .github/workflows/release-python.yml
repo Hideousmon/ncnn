@@ -148,16 +148,16 @@ jobs:
         CIBW_BUILD: ${{ matrix.build }}
         CIBW_BUILD_VERBOSITY: 1
         CIBW_ENVIRONMENT_WINDOWS: >
-          PATH="D:\\a\\ncnn-gpu-pre-verification\\ncnn\\Vulkan-Loader\\build\\loader\\Debug;$PATH"
+          PATH="D:\\a\\ncnn\\ncnn\\Vulkan-Loader\\build\\loader\\Debug;$PATH"
           CMAKE_BUILD_PARALLEL_LEVEL=2 NCNN_VULKAN=TRUE 
-          VULKAN_SDK=D:/a/ncnn-gpu-pre-verification/ncnn/Vulkan-Loader/external/Vulkan-Headers
+          VULKAN_SDK=D:/a/ncnn/ncnn/Vulkan-Loader/external/Vulkan-Headers
         CIBW_BEFORE_ALL: git clone https://github.com/KhronosGroup/Vulkan-Loader.git &&
           cd Vulkan-Loader && mkdir build && cd build &&
           python3 ../scripts/update_deps.py --dir ../external --arch ${{ matrix.arch }} --config debug &&
           cmake -C ../external/helper.cmake -G "Visual Studio 16 2019" -A Win32 -DCMAKE_BUILD_TYPE=Debug .. &&
           cmake --build . &&
-          mklink /d "D:/a/ncnn-gpu-pre-verification/ncnn/Vulkan-Loader/external/Vulkan-Headers/build/install/lib"
-          "D:/a/ncnn-gpu-pre-verification/ncnn/Vulkan-Loader/build/loader/Debug"
+          mklink /d "D:/a/ncnn/ncnn/Vulkan-Loader/external/Vulkan-Headers/build/install/lib"
+          "D:/a/ncnn/ncnn/Vulkan-Loader/build/loader/Debug"
         CIBW_BEFORE_BUILD: pip install delvewheel
         CIBW_REPAIR_WHEEL_COMMAND: delvewheel repair -w {dest_dir} {wheel}
       with:
@@ -242,9 +242,9 @@ jobs:
 
     - name: Build wheels for manylinux
       if: (matrix.build != 'cp36-musllinux*') && (matrix.build != 'cp37-musllinux*') &&
-        (matrix.build != 'cp38-musllinux*') && (matrix.build != 'cp39-musllinux*') &&
-        (matrix.build != 'cp310-musllinux*') && (matrix.build != 'cp311-musllinux*') &&
-        (matrix.build != 'cp312-musllinux*')
+          (matrix.build != 'cp38-musllinux*') && (matrix.build != 'cp39-musllinux*') &&
+          (matrix.build != 'cp310-musllinux*') && (matrix.build != 'cp311-musllinux*') &&
+          (matrix.build != 'cp312-musllinux*')
       uses: pypa/cibuildwheel@v2.15.0
       env:
         CIBW_ARCHS_LINUX: ${{ matrix.arch }}
@@ -265,9 +265,9 @@ jobs:
 
     - name: Build wheels for musllinux
       if: (matrix.build == 'cp36-musllinux*') || (matrix.build == 'cp37-musllinux*') ||
-        (matrix.build == 'cp38-musllinux*') || (matrix.build == 'cp39-musllinux*') ||
-        (matrix.build == 'cp310-musllinux*') || (matrix.build == 'cp311-musllinux*') ||
-        (matrix.build == 'cp312-musllinux*')
+          (matrix.build == 'cp38-musllinux*') || (matrix.build == 'cp39-musllinux*') ||
+          (matrix.build == 'cp310-musllinux*') || (matrix.build == 'cp311-musllinux*') ||
+          (matrix.build == 'cp312-musllinux*')
       uses: pypa/cibuildwheel@v2.15.0
       env:
         CIBW_ARCHS_LINUX: ${{ matrix.arch }}

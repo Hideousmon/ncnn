@@ -32,6 +32,8 @@ for i, arg in enumerate(sys.argv):
 NCNN_VULKAN_FLAG = os.environ.get("NCNN_VULKAN", "FALSE")
 if (NCNN_VULKAN_FLAG == "TRUE"):
     NCNN_VULKAN = True
+Vulkan_INCLUDE_DIR = os.environ.get("Vulkan_INCLUDE_DIR", "")
+Vulkan_LIBRARY = os.environ.get("Vulkan_LIBRARY", "")
 
 # Convert distutils Windows platform specifiers to CMake -A arguments
 PLAT_TO_CMAKE = {
@@ -84,6 +86,9 @@ class CMakeBuild(build_ext):
             cmake_args.append("-DNCNN_VULKAN=ON")
         else:
             cmake_args.append("-DNCNN_VULKAN=OFF")
+        if Vulkan_INCLUDE_DIR != "" and Vulkan_LIBRARY != "":
+            cmake_args.append("-DVulkan_INCLUDE_DIR=" + Vulkan_INCLUDE_DIR)
+            cmake_args.append("-DVulkan_LIBRARY=" + Vulkan_LIBRARY)
         build_args = []
 
         if self.compiler.compiler_type == "msvc":

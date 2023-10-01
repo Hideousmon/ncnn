@@ -71,7 +71,7 @@ jobs:
         CIBW_BUILD: ${{ matrix.build }}
         CIBW_BUILD_VERBOSITY: 1
         CIBW_ENVIRONMENT: CMAKE_BUILD_PARALLEL_LEVEL=2 Torch_INSTALL_DIR=/project/libtorch-shared-with-deps-latest
-        CIBW_BEFORE_ALL:  apt install wget zip &&
+        CIBW_BEFORE_ALL:  yum install wget zip &&
                         wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.0.1%2Bcpu.zip &&
                         unzip libtorch-cxx11-abi-shared-with-deps-2.0.1%2Bcpu.zip &&
                         ls

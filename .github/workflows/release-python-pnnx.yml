@@ -79,7 +79,7 @@ jobs:
         CIBW_ENVIRONMENT: CMAKE_BUILD_PARALLEL_LEVEL=2 Torch_INSTALL_DIR=/project/libtorch
         CIBW_BEFORE_ALL:  yum install wget zip -y &&
                         wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.0.1%2Bcpu.zip &&
-                        unzip libtorch-cxx11-abi-shared-with-deps-2.0.1+cpu.zip &&
+                        unzip libtorch-cxx11-abi-shared-with-deps-2.0.1+cpu.zip
       with:
         package-dir: ./tools/pnnx
         output-dir: wheelhouse

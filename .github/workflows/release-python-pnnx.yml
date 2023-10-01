@@ -61,7 +61,8 @@ jobs:
     - name: init submodules
       shell: bash
       run: |
-        cd /home/runner/work/ncnn/ncnn/tools/pnnx/python
+        ls
+        cd ncnn/tools/pnnx/python
         git submodule update --init
 
     - uses: actions/setup-python@v4

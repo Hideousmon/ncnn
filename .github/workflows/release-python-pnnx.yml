@@ -39,19 +39,19 @@ jobs:
       matrix:
         include:
           - { os: ubuntu-20.04, arch: x86_64,     build: 'cp*-manylinux*' }
-          - { os: ubuntu-20.04, arch: x86_64,     build: 'cp*-musllinux*' }
-          - { os: ubuntu-20.04, arch: x86_64,     build: 'pp*'            }
-          - { os: ubuntu-20.04, arch: i686,       build: 'cp*-manylinux*' }
-          - { os: ubuntu-20.04, arch: i686,       build: 'cp*-musllinux*' }
-          - { os: ubuntu-20.04, arch: i686,       build: 'pp*'            }
-          - { os: windows-2019, arch: x86,        build: 'cp*'            }
-          - { os: windows-2019, arch: AMD64,      build: 'cp*'            }
-          - { os: windows-2019, arch: AMD64,      build: 'pp*'            }
-          - { os: windows-2019, arch: ARM64,      build: 'cp*'            }
-          - { os: macos-latest, arch: x86_64,     build: 'cp*'            }
-          - { os: macos-latest, arch: x86_64,     build: 'pp*'            }
-          - { os: macos-latest, arch: arm64,      build: 'cp*'            }
-          - { os: macos-latest, arch: universal2, build: 'cp*'            }
+          # - { os: ubuntu-20.04, arch: x86_64,     build: 'cp*-musllinux*' }
+          # - { os: ubuntu-20.04, arch: x86_64,     build: 'pp*'            }
+          # - { os: ubuntu-20.04, arch: i686,       build: 'cp*-manylinux*' }
+          # - { os: ubuntu-20.04, arch: i686,       build: 'cp*-musllinux*' }
+          # - { os: ubuntu-20.04, arch: i686,       build: 'pp*'            }
+          # - { os: windows-2019, arch: x86,        build: 'cp*'            }
+          # - { os: windows-2019, arch: AMD64,      build: 'cp*'            }
+          # - { os: windows-2019, arch: AMD64,      build: 'pp*'            }
+          # - { os: windows-2019, arch: ARM64,      build: 'cp*'            }
+          # - { os: macos-latest, arch: x86_64,     build: 'cp*'            }
+          # - { os: macos-latest, arch: x86_64,     build: 'pp*'            }
+          # - { os: macos-latest, arch: arm64,      build: 'cp*'            }
+          # - { os: macos-latest, arch: universal2, build: 'cp*'            }
 
     steps:
     - uses: actions/checkout@v4
@@ -71,7 +71,7 @@ jobs:
         CIBW_BUILD: ${{ matrix.build }}
         CIBW_BUILD_VERBOSITY: 1
         CIBW_ENVIRONMENT: CMAKE_BUILD_PARALLEL_LEVEL=2 Torch_INSTALL_DIR=/project/libtorch-shared-with-deps-latest
-        CIBW_BEFORE_ALL: ywget https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip
+        CIBW_BEFORE_ALL: wget https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zip
                         unzip libtorch-shared-with-deps-latest.zip
       with:
         output-dir: wheelhouse

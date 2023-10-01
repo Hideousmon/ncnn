@@ -2,8 +2,8 @@ name: release-python
 # on: [push, pull_request]
 on:
   push:
-#    tags:
-#      - '*'
+   tags:
+     - '*'
 env:
   DEVELOPER_DIR: /Applications/Xcode_13.4.1.app/Contents/Developer
   MAC_DEPLOYMENT_TARGET: '10.9'
